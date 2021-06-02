@@ -1,18 +1,22 @@
 {
-  "name": "server",
+  "name": "backend",
   "version": "1.0.0",
-  "description": "server backend auth",
-  "main": "server.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "engines": {
-    "node": "14.16.0"
-  },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.6.0",
     "express": "^4.17.1",
-    "cors": "^2.8.5"
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.12",
+    "nodemon": "^2.0.4"
   }
 }
