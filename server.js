@@ -12,11 +12,10 @@ app.use(cors());
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`The server has started on port: ${PORT}`));
-const uri = 'mongodb+srv://matthewcy:9rxcFZ3WN4nehXus@cluster0.dgsat.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 
 // set up mongoose
 mongoose.connect(
-  uri,
+  process.env.MONGODB_CONNECTION_STRING,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
