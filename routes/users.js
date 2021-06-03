@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { isValidObjectId } = require("mongoose");
 const auth = require("../middleware/auth");
 const User = require("../models/user.model");
 
@@ -45,10 +46,30 @@ router.post("/register", async (req, res) => {
   }
 });
 
+router.patch("/favorite", async (req, res) => {
+  try {
+    const user = await User.findById(req.body.id);
+    if (!user) {
+      return res.status(404).json({ message: 'Cannot find user' })
+    }
+    res.user = user;
+    console.log(res.user.favPokemon);
+    var favArr = req.body.putArr;
+    if (req.body.putArr) {
+      res.user.favPokemon = favArr;
+    }
+    const updatedUser = await res.user.save();
+    console.log(res.user.favPokemon);
+    res.json(updatedUser);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-
+    console.log(res.user);
     // validate
     if (!email || !password)
       return res.status(400).json({ msg: "Not all fields have been entered." });
@@ -69,7 +90,7 @@ router.post("/login", async (req, res) => {
       user: {
         id: user._id,
         displayName: user.displayName,
-        favePokemon: user.favPokemon,
+        favPokemon: user.favPokemon,
       },
     });
   } catch (err) {
