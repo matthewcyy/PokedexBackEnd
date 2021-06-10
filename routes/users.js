@@ -85,6 +85,7 @@ router.post("/login", async (req, res) => {
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
     console.log("token",token);
+    console.log("user:",user);
     res.json({
       token,
       user: {
@@ -130,6 +131,7 @@ router.get("/", auth, async (req, res) => {
   res.json({
     displayName: user.displayName,
     id: user._id,
+    favPokemon: user.favPokemon,
   });
 });
 
